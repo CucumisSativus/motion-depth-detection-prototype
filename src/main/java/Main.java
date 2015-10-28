@@ -16,8 +16,7 @@ public class Main {
         camera_window = new OpenCVWindow("Camera window");
         trackerWindow = new OpenCVWindow("Tracker window");
         tracker = new ObjectTracker(20, 60, 50, 50, 200, 255);
-        sliderWindow = new SliderWindow();
-        sliderWindow.createAndShowGUI();
+        sliderWindow = SliderWindow.createAndShowGUI();
     }
     public static void main(String [] args) {
         Main main = new Main();
@@ -36,6 +35,13 @@ public class Main {
             if(!frame.empty()) {
                 camera_window.showImage(frame);
                 trackerWindow.showImage(tracker.trackedObjectImage(frame));
+                tracker.setHueStart(sliderWindow.getHueStart());
+                tracker.setHueStop(sliderWindow.getHueStop());
+                tracker.setSaturationStart(sliderWindow.getSaturationStart());
+                tracker.setSaturationStop(sliderWindow.getSaturationStop());
+                tracker.setValueStart(sliderWindow.getValueStart());
+                tracker.setValueStop(sliderWindow.getValueStop());
+                //System.out.println(sliderWindow.getHueStart());
             }
         }
 
