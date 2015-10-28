@@ -8,15 +8,18 @@ import org.opencv.videoio.VideoCapture;
  * to "faceDetection.png".
  */
 public class Main {
-    OpenCVWindow camera_window = null;
+    OpenCVWindow cameraWindow = null;
     OpenCVWindow trackerWindow = null;
     ObjectTracker tracker;
     SliderWindow sliderWindow;
     Main(){
-        camera_window = new OpenCVWindow("Camera window");
+        cameraWindow = new OpenCVWindow("Camera window");
         trackerWindow = new OpenCVWindow("Tracker window");
         tracker = new ObjectTracker(20, 60, 50, 50, 200, 255);
-        sliderWindow = SliderWindow.createAndShowGUI();
+        sliderWindow = new SliderWindow();
+        
+        trackerWindow.setLocation(cameraWindow.getLocation().x + cameraWindow.getWidth(), cameraWindow.getLocation().y);
+        sliderWindow.setLocation(trackerWindow.getLocation().x + trackerWindow.getWidth(), trackerWindow.getLocation().y);
     }
     public static void main(String [] args) {
         Main main = new Main();
@@ -33,15 +36,16 @@ public class Main {
             Mat frame = new Mat();
             camera.read(frame);
             if(!frame.empty()) {
-                camera_window.showImage(frame);
+                cameraWindow.showImage(frame);
                 trackerWindow.showImage(tracker.trackedObjectImage(frame));
-                tracker.setHueStart(sliderWindow.getHueStart());
+                /*tracker.setHueStart(sliderWindow.getHueStart());
                 tracker.setHueStop(sliderWindow.getHueStop());
                 tracker.setSaturationStart(sliderWindow.getSaturationStart());
                 tracker.setSaturationStop(sliderWindow.getSaturationStop());
                 tracker.setValueStart(sliderWindow.getValueStart());
-                tracker.setValueStop(sliderWindow.getValueStop());
+                tracker.setValueStop(sliderWindow.getValueStop());*/
                 //System.out.println(sliderWindow.getHueStart());
+                tracker.setParams(sliderWindow.getSlidersValues());
             }
         }
 

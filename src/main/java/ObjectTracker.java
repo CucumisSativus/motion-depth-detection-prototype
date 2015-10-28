@@ -17,6 +17,15 @@ public class ObjectTracker {
         this.saturationStop = saturationStop;
         this.valueStop = valueStop;
     }
+    
+    public void setParams(int[] values) {
+    	this.hueStart = values[0];
+    	this.hueStop = values[1];
+    	this.saturationStart = values[2];
+    	this.saturationStop = values[3];
+    	this.valueStart = values[4];
+    	this.valueStop = values[5];
+    }
 
     public int getHueStart() {
         return hueStart;

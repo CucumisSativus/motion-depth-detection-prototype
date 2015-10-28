@@ -5,8 +5,9 @@ import javax.swing.*;
 import java.awt.*;
 
 class ImageImplement extends JPanel {
-
-    private Image img;
+	private static final long serialVersionUID = 1L;
+	
+	private Image img;
 
 
     public ImageImplement(Image img) {
@@ -26,8 +27,9 @@ class ImageImplement extends JPanel {
 }
 
 public class OpenCVWindow extends JFrame{
-
-    ImageImplement panel = null;
+	private static final long serialVersionUID = 1L;
+	
+	ImageImplement panel = null;
     public OpenCVWindow(){
         prepareWindow();
     }
