@@ -11,10 +11,13 @@ public class Main {
     OpenCVWindow camera_window = null;
     OpenCVWindow trackerWindow = null;
     ObjectTracker tracker;
+    SliderWindow sliderWindow;
     Main(){
         camera_window = new OpenCVWindow("Camera window");
         trackerWindow = new OpenCVWindow("Tracker window");
         tracker = new ObjectTracker(20, 60, 50, 50, 200, 255);
+        sliderWindow = new SliderWindow();
+        sliderWindow.createAndShowGUI();
     }
     public static void main(String [] args) {
         Main main = new Main();

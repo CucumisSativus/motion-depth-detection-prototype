@@ -1,6 +1,7 @@
 import org.opencv.core.Core;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
+import org.opencv.core.MatOfPoint;
 
 /**
  * Created by michal on 27.10.15.
@@ -14,8 +15,7 @@ public class CountourComparator {
         this.thresholdMax = thresholdMax;
     }
 
-    static Mat substract(Mat firstFrame, Mat secondFrame){
-       Mat mask = new Mat(firstFrame.rows(), firstFrame.cols(), CvType.CV_8U);
-
+    static Mat substract(java.util.List<MatOfPoint> contours_old, java.util.List<MatOfPoint> contours_new){
+        return new Mat();
     }
 }
