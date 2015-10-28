@@ -1,19 +1,8 @@
 
-import java.awt.*;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Iterator;
-
-import javax.imageio.ImageIO;
-import javax.imageio.ImageReadParam;
-import javax.imageio.ImageReader;
-import javax.imageio.stream.ImageInputStream;
-import javax.swing.*;
-
 import org.opencv.core.Mat;
-import org.opencv.core.MatOfByte;
-import org.opencv.imgcodecs.Imgcodecs;
+
+import javax.swing.*;
+import java.awt.*;
 
 class ImageImplement extends JPanel {
 
