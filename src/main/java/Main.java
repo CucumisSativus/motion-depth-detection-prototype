@@ -10,25 +10,36 @@ import org.opencv.videoio.VideoCapture;
 public class Main {
     OpenCVWindow cameraWindow = null;
     OpenCVWindow trackerWindow = null;
+    OpenCVWindow floorFinderWindow = null;
     ObjectTracker tracker;
     SliderWindow sliderWindow;
+    FloorFinder floorFinder;
+
     Main(){
         cameraWindow = new OpenCVWindow("Camera window");
-        trackerWindow = new OpenCVWindow("Tracker window");
+//        trackerWindow = new OpenCVWindow("Tracker window");
+        floorFinderWindow = new OpenCVWindow("Floor finder window");
         tracker = new ObjectTracker(20, 60, 50, 50, 200, 255);
         sliderWindow = new SliderWindow();
+        floorFinder = new FloorFinder(50, 100, 5);
         
-        trackerWindow.setLocation(cameraWindow.getLocation().x + cameraWindow.getWidth(), cameraWindow.getLocation().y);
-        sliderWindow.setLocation(trackerWindow.getLocation().x + trackerWindow.getWidth(), trackerWindow.getLocation().y);
+//        trackerWindow.setLocation(cameraWindow.getLocation().x + cameraWindow.getWidth(), cameraWindow.getLocation().y);
+//        sliderWindow.setLocation(trackerWindow.getLocation().x + trackerWindow.getWidth(), trackerWindow.getLocation().y);
     }
     public static void main(String [] args) {
         Main main = new Main();
-        main.run();
+        main.run(args.length == 1 ? args[0] : null);
     }
 
-    public void run(){
+    public void run(String filePath){
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
-        VideoCapture camera = new VideoCapture(0);
+        VideoCapture camera;
+        if(filePath != null){
+            camera = new VideoCapture(filePath);
+        }
+        else{
+            camera = new VideoCapture(0);
+        }
         if(!camera.isOpened()){
             System.out.println("Error");
         }
@@ -37,14 +48,8 @@ public class Main {
             camera.read(frame);
             if(!frame.empty()) {
                 cameraWindow.showImage(frame);
-                trackerWindow.showImage(tracker.trackedObjectImage(frame));
-                /*tracker.setHueStart(sliderWindow.getHueStart());
-                tracker.setHueStop(sliderWindow.getHueStop());
-                tracker.setSaturationStart(sliderWindow.getSaturationStart());
-                tracker.setSaturationStop(sliderWindow.getSaturationStop());
-                tracker.setValueStart(sliderWindow.getValueStart());
-                tracker.setValueStop(sliderWindow.getValueStop());*/
-                //System.out.println(sliderWindow.getHueStart());
+//                trackerWindow.showImage(tracker.trackedObjectImage(frame));
+                floorFinderWindow.showImage(floorFinder.findFoloor(frame));
                 tracker.setParams(sliderWindow.getSlidersValues());
             }
         }
